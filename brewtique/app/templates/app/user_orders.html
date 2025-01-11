@@ -1,0 +1,29 @@
+{% extends 'app/base.html' %}
+
+{% block title %}Order Success{% endblock title %}
+
+{% block main-content %}
+<div class="container my-5" style="max-width: 1200px; margin: 0 auto;">
+    <h2 class="text-center mb-4" style="font-family: 'Arial', sans-serif; color: #333; font-weight: bold;">Your Orders</h2>
+    <table class="table table-striped table-bordered" style="width: 100%; border-collapse: collapse; background-color: #fff; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 8px;">
+        <thead>
+            <tr>
+                <th style="padding: 15px; text-align: left; border-bottom: 1px solid #ddd; background-color: #f4f4f4; font-weight: bold; color: #333;">Order ID</th>
+                <th style="padding: 15px; text-align: left; border-bottom: 1px solid #ddd; background-color: #f4f4f4; font-weight: bold; color: #333;">Status</th>
+                <th style="padding: 15px; text-align: left; border-bottom: 1px solid #ddd; background-color: #f4f4f4; font-weight: bold; color: #333;">Total Amount</th>
+                <th style="padding: 15px; text-align: left; border-bottom: 1px solid #ddd; background-color: #f4f4f4; font-weight: bold; color: #333;">Order Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr style="background-color: #fff;">
+                <td style="padding: 15px; text-align: left; border-bottom: 1px solid #ddd;">{{ order.id }}</td>
+                <td style="padding: 15px; text-align: left; border-bottom: 1px solid #ddd;">{{ order.status }}</td>
+                <td style="padding: 15px; text-align: left; border-bottom: 1px solid #ddd;">{{ order.total_amount }}</td>
+                <td style="padding: 15px; text-align: left; border-bottom: 1px solid #ddd;">{{ order.order_date }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

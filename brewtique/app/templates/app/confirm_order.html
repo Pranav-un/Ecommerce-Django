@@ -1,0 +1,76 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block title %}Confirm Order{% endblock %}
+
+{% block main-content %}
+<div class="container my-5" style="max-width: 1200px; margin: 0 auto;">
+    <h2 class="text-center mb-4" style="font-family: 'Arial', sans-serif; color: #333; font-weight: bold;">Confirm Your Order</h2>
+
+    {% comment %} <div class="cart-summary" style="padding: 20px; border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9; margin-bottom: 30px;">
+        <h3 style="font-size: 20px; color: #333; font-weight: bold;">Summary</h3>
+        <ul style="list-style-type: none; padding: 0; margin: 0;">
+            {% for item in cart_items %}
+                <li style="padding: 10px 0; border-bottom: 1px solid #ddd; font-size: 16px;">
+                    {{ item.product.title }} x {{ item.quantity }} - ₹{{ item.product.discounted_price }} each
+                    <br>
+                    Total: ₹{{ item.total_cost }}
+                </li>
+            {% endfor %}
+        </ul>
+    
+        <p style="font-size: 16px;">Shipping: ₹{{ shipping_amount }}</p>
+    
+        <!-- Add the cart total and shipping cost -->
+        <p style="font-size: 18px; font-weight: bold;">Total (including Shipping): ₹{{ total_amount }}</p>
+    </div>
+     {% endcomment %}
+
+    <div class="address-selection" style="padding: 20px; border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9;">
+        <h3 style="font-size: 20px; color: #333; font-weight: bold;">Select Delivery Address</h3>
+        <form method="post" action="{% url 'create_order' %}">
+            {% csrf_token %}
+            
+            <div class="form-group" style="margin-bottom: 20px;">
+                {% for address in addresses %}
+                    <div class="form-check" style="margin-bottom: 15px;">
+                        <input class="form-check-input" type="radio" name="address" id="address_{{ address.id }}" value="{{ address.id }}" required style="margin-right: 10px;">
+                        <label class="form-check-label" for="address_{{ address.id }}" style="font-size: 16px; color: #333;">
+                            <strong>{{ address.name }}</strong><br>
+                            {{ address.locality }}, {{ address.city }}<br>
+                            Mobile: {{ address.mobile }}<br>
+                            {{ address.state }} - {{ address.zipcode }}
+                        </label>
+                    </div>
+                {% empty %}
+                    <p style="font-size: 16px; color: #888;">No saved addresses found. Please add an address to continue.</p>
+                {% endfor %}
+            </div>
+
+            <h3 style="font-size: 20px; color: #333; font-weight: bold;">Select Payment Method</h3>
+            <div class="form-check" style="margin-bottom: 15px;">
+                <input class="form-check-input" type="radio" name="payment_method" id="credit_card" value="credit_card" required style="margin-right: 10px;">
+                <label class="form-check-label" for="credit_card" style="font-size: 16px; color: #333;">
+                    Credit/Debit Card
+                </label>
+            </div>
+
+            <div class="form-check" style="margin-bottom: 15px;">
+                <input class="form-check-input" type="radio" name="payment_method" id="net_banking" value="net_banking" required style="margin-right: 10px;">
+                <label class="form-check-label" for="net_banking" style="font-size: 16px; color: #333;">
+                    Net Banking
+                </label>
+            </div>
+
+            <div class="form-check" style="margin-bottom: 20px;">
+                <input class="form-check-input" type="radio" name="payment_method" id="cash_on_delivery" value="cash_on_delivery" required style="margin-right: 10px;">
+                <label class="form-check-label" for="cash_on_delivery" style="font-size: 16px; color: #333;">
+                    Cash on Delivery
+                </label>
+            </div>
+            
+            <button type="submit" class="btn btn-success mt-4" style="padding: 12px 30px; background-color: #28a745; color: white; border: none; font-size: 16px; border-radius: 8px;">Confirm and Pay</button>
+        </form>
+    </div>
+</div>
+{% endblock main-content %}

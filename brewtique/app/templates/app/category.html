@@ -1,0 +1,44 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block title %}Category: {{ category_name }}{% endblock title %}
+
+{% block main-content %}
+<div class="category-heading" style="text-align: center; margin-bottom: 20px;">
+  <br>
+  <h3>Products</h3>
+  <p style="font-size: 1em; color: #666;">Discover the best products in our {{ category_name }} collection, handpicked just for you.</p>
+</div>
+
+<div class="card-container">
+  {% for product in products %}
+  <div class="card">
+    
+    <div class="imgBox">
+      {% if product.product_image %}
+        <img src="{{ product.product_image.url }}" alt="{{ product.title }}" class="product-img" style="width: 200px; height: auto;">
+      {% else %}
+        <img src="{% static 'app/img/default-image.png' %}" alt="No Image Available" class="product-img" style="width: 100%; height: auto;">
+      {% endif %}
+    </div>
+    
+    <div class="contentBox">
+      <h3>{{ product.title }}</h3>
+      <h2 class="price">
+        {% if product.discounted_price %}
+          <span class="discounted-price">{{ product.discounted_price|floatformat:2 }}<small> rs</small></span>
+          <span class="original-price" style="text-decoration: line-through; color: #999;">{{ product.selling_price|floatformat:2 }}<small> rs</small></span>
+        {% else %}
+          {{ product.selling_price|floatformat:2 }}<small> rs</small>
+        {% endif %}
+      </h2>
+      <a href="{% url 'product-detail' product.id %}" class="buy">View Now</a>
+    </div>
+    
+  </div>
+  {% empty %}
+    <p>No products available in this category.</p>
+  {% endfor %}
+</div>
+{% endblock main-content %}
+

@@ -1,0 +1,58 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock title %}
+
+{% block banner-slider %}
+<div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="{% static 'app/img/banner/1.png' %}" class="d-block w-100" alt="Banner 1">
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'app/img/banner/2.png' %}" class="d-block w-100" alt="Banner 2">
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'app/img/banner/5.png' %}" class="d-block w-100" alt="Banner 3">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+{% endblock banner-slider %}
+
+{% block main-content %}
+<br>
+<h4 style="text-align: center;">Our Products</h4>
+<p style="text-align: center; font-size: 0.9em; color: #666;">Explore our top-selling items handpicked just for you.</p>
+
+<div class="card-container">
+  {% for product in products %}
+  <div class="card">
+    <div class="imgBox">
+      <img src="{{ product.product_image.url }}" alt="{{ product.title }}" class="mouse">
+    </div>
+    <div class="contentBox">
+      <h3>{{ product.title }}</h3>
+      <h2 class="price">
+        {% if product.discounted_price %}
+          <span class="discounted-price" style="color: #21d192;">{{ product.discounted_price }}<small> rs</small></span>
+        {% endif %}
+        {% if product.selling_price %}
+          <span class="original-price" style="text-decoration: line-through;">{{ product.selling_price }}<small> rs</small></span>
+        {% endif %}
+      </h2>
+      <a href="{% url 'product-detail' product.pk %}" class="buy">Buy Now</a>
+    </div>
+  </div>
+  {% empty %}
+  <p>No featured products available.</p>
+  {% endfor %}
+</div>
+{% endblock main-content %}

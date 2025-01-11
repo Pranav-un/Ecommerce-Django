@@ -1,0 +1,107 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block title %}Your Cart{% endblock title %}
+
+{% block main-content %}
+<div class="container my-5" style="max-width: 1200px; margin: 0 auto;">
+    <h2 class="text-center mb-4" style="font-family: 'Arial', sans-serif; color: #333; font-weight: bold;">Your Cart</h2>
+    <div class="cart-items">
+        {% for item in cart_items %}
+            <div class="cart-item" data-id="{{ item.id }}" style="display: flex; align-items: center; justify-content: space-between; padding: 10px; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 15px;">
+                <img src="{{ item.product.product_image.url }}" alt="{{ item.product.title }}" width="100" style="border-radius: 8px;">
+                <div style="flex: 1; padding-left: 15px;">
+                    <h4 style="font-size: 18px; color: #333;">{{ item.product.title }}</h4>
+                    <p style="margin: 5px 0;">Price: ₹{{ item.product.discounted_price }}</p>
+                    <label for="quantity-{{ item.id }}" style="font-size: 14px;">Quantity:</label>
+                    <input type="number" class="quantity-input" id="quantity-{{ item.id }}" value="{{ item.quantity }}" min="1" style="width: 60px; padding: 5px; margin: 5px 0; border: 1px solid #ccc; border-radius: 4px;">
+                    <p style="margin-top: 10px;">Total: ₹<span class="item-total">{{ item.total_cost }}</span></p>
+                </div>
+                <button class="remove-btn btn btn-danger" data-id="{{ item.id }}" style="padding: 8px 12px; border-radius: 4px; background-color: #e74c3c; color: white; border: none;">Remove</button>
+            </div>
+            <hr>
+        {% endfor %}
+    </div>
+    
+    <div class="cart-summary" style="padding: 20px; border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9;">
+        <h3 style="font-size: 20px; color: #333; font-weight: bold;">Summary</h3>
+        <p style="font-size: 16px;">Subtotal: ₹<span id="subtotal">{{ amount }}</span></p>
+        <p style="font-size: 16px;">Shipping: ₹<span id="shipping">{{ shipping_amount }}</span></p>
+        <p style="font-size: 18px; font-weight: bold;">Total: ₹<span id="total">{{ total_amount }}</span></p>
+        <a href="{% url 'confirm-order' %}" class="btn btn-success" style="padding: 10px 20px; background-color: #28a745; color: white; text-decoration: none; border-radius: 4px;">Proceed to Checkout</a>
+        
+        {% comment %} <button class="btn btn-primary" id="refresh-cart" style="margin-top: 10px; padding: 10px 20px; background-color: #007bff; color: white; border-radius: 4px; border: none;">Refresh Cart</button> {% endcomment %}
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const quantityInputs = document.querySelectorAll('.quantity-input');
+        const removeButtons = document.querySelectorAll('.remove-btn');
+        
+        // Update quantity
+        quantityInputs.forEach(input => {
+            input.addEventListener('change', function () {
+                const cartId = this.closest('.cart-item').dataset.id;
+                const quantity = this.value;
+                
+                fetch("{% url 'update-cart' %}", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{ csrf_token }}',
+                    },
+                    body: JSON.stringify({ cart_id: cartId, quantity: quantity })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        this.closest('.cart-item').querySelector('.item-total').innerText = data.total_cost;
+                        updateSummary();
+                    }
+                });
+            });
+        });
+
+        // Remove item from cart
+        removeButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const cartId = this.dataset.id;
+                
+                fetch("{% url 'remove-cart-item' %}", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{ csrf_token }}',
+                    },
+                    body: JSON.stringify({ cart_id: cartId })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        this.closest('.cart-item').remove();
+                        updateSummary();
+                    }
+                });
+            });
+        });
+
+        // Refresh Cart (reload the page)
+        document.getElementById('refresh-cart').addEventListener('click', function() {
+            location.reload(); // Reload the page to fetch updated cart data
+        });
+
+        // Update the cart summary
+        function updateSummary() {
+            let subtotal = 0;
+            document.querySelectorAll('.item-total').forEach(total => {
+                subtotal += parseFloat(total.innerText);
+            });
+            
+            const shipping = parseFloat(document.getElementById('shipping').innerText);
+            document.getElementById('subtotal').innerText = subtotal;
+            document.getElementById('total').innerText = subtotal + shipping;
+        }
+    });
+</script>
+{% endblock main-content %}

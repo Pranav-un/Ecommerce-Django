@@ -1,0 +1,69 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block title %}{{ product.title }}{% endblock title %}
+
+{% block main-content %}
+<div class="product-details-section">
+    <div class="product-details-container">
+        <div class="product-image">
+            <img src="{{ product.product_image.url }}" alt="{{ product.title }}" id="product-img">
+        </div>
+        <div class="product-info">
+            <h1 class="product-name">{{ product.title }}</h1>
+            {% comment %} <div class="rating">
+                {% for star in "★★★★★" %}
+                    {% if forloop.counter <= product.rating %}
+                        <span class="star">{{ star }}</span>
+                    {% else %}
+                        <span class="star">&#9734;</span>  <!-- Empty star -->
+                    {% endif %}
+                {% endfor %}
+            </div> {% endcomment %}
+
+            <p class="price">
+                {% if product.discounted_price %}
+                    <span class="discounted-price" style="color: #21d192;">${{ product.discounted_price }}</span>
+                {% endif %}
+                {% if product.selling_price %}
+                    <span class="original-price">${{ product.selling_price }}</span>
+                {% endif %}
+            </p>
+
+            <p class="product-description">{{ product.description }}</p>
+            <p class="product-composition">Composition: {{ product.composition }}</p>
+            <p class="product-application">Application: {{ product.prod_app }}</p>
+            
+            <!-- Stock Information -->
+            <p class="product-stock">
+                {% if product.stock == 'available' %}
+                    <span class="in-stock" style="color: #21d192;">In Stock</span>
+                {% else %}
+                    <span class="out-of-stock" style="color: red;">Out of Stock</span>
+                {% endif %}
+            </p>
+
+            <div class="product-actions">
+                {% if user.is_authenticated %}
+                    <form action="/add-to-cart" class="d-inline">
+                        <input type="hidden" name="prod_id" value="{{ product.id }}"/>
+                        <button id="add-to-cart-btn" class="btn" 
+                                {% if product.stock != 'available' %}disabled{% endif %}>
+                            Add to Cart
+                        </button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'login' %}" class="btn">Login to Add to Cart</a>
+                {% endif %}
+
+                <!-- Buy Now button, only enabled if stock is available -->
+                {% comment %} <a class="btn btn-primary shadow px-5 py-2 ms-4" 
+                   href="{% url 'showcart' %}" 
+                   {% if product.stock != 'available' %}disabled{% endif %}>
+                    Buy Now
+                </a> {% endcomment %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

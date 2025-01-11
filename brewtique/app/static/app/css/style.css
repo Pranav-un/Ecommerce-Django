@@ -1,0 +1,460 @@
+
+.card-container {
+    overflow: auto;
+    display: flex;
+    flex-wrap: wrap; /* Ensures cards wrap to the next line if there's not enough space */
+    justify-content: space-between; /* Adds space between the cards */
+    width: 100%;
+    gap: 10px; /* Add gap between cards, adjust the value as needed */
+    padding-right: 10px; /* Add padding to the right if necessary */
+}
+
+.card {
+    position: relative;
+    /* display: inline-block; */
+    float: left;
+    width: 320px;
+    height: 480px;
+    background: #191919;
+    border-radius: 20px;
+    overflow: hidden;
+    margin: 20px; /* Add margin to all four sides */
+  }
+  
+  .card::before {
+    content: "Brewtique";
+    position: absolute;
+    top: -50%;
+    width: 100%;
+    height: 100%;
+    background: #21d192;
+    transform: skewY(345deg);
+    transition: 0.5s;
+  }
+  
+  .card:hover::before {
+    top: -70%;
+    transform: skewY(390deg);
+  }
+  
+  .card::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    font-weight: 600;
+    font-size: 6em;
+    color: rgba(0, 0, 0, 0.1);
+  }
+  
+  .card .imgBox {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+    z-index: 1;
+  }
+  
+  .card .imgBox img {
+    max-width: 100%;
+    transition: .5s;
+  }
+  
+  .card:hover .imgBox img {
+    max-width: 50%;
+  }
+  
+  .card .contentBox {
+    position: relative;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 2;
+  }
+  
+  .card .contentBox h3 {
+    font-size: 18px;
+    color: rgb(0, 0, 0);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  .card .contentBox .price {
+    font-size: 24px;
+    color: rgb(0, 0, 0);
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+  
+  .card .contentBox .buy {
+    position: relative;
+    top: 100px;
+    opacity: 0;
+    padding: 10px 30px;
+    margin-top: 15px;
+    color: #000000;
+    text-decoration: none;
+    background: #21d192;
+    border-radius: 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: 0.5s;
+  }
+  
+  .card:hover .contentBox .buy {
+    top: 0;
+    opacity: 1;
+  }
+  
+  .mouse {
+    height: 300px;
+    width: auto;
+
+  }
+
+  .card:hover .imgBox img {
+    /* Remove this rule to prevent animation */
+    /* max-width: 50%; */
+    max-width: 100%; /* Set to 100% to keep image at original size */
+  }
+
+  .product-details-section {
+    background-color: #f9f9f9;
+    padding: 50px;
+}
+
+.product-details-container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 30px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.product-image img {
+    width: 400px;
+    height: auto;
+    border-radius: 10px;
+}
+
+.product-info {
+    max-width: 500px;
+    margin-left: 30px;
+}
+
+.product-name {
+    font-size: 32px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.rating {
+    margin-bottom: 15px;
+}
+
+.star {
+    color: #ffd700;
+    font-size: 20px;
+}
+
+.price {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.discounted-price {
+    color: #28a745;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.original-price {
+    text-decoration: line-through;
+    color: #999;
+}
+
+.product-description {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.product-actions .btn {
+    padding: 10px 20px;
+    background-color: #21d192;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-right: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.product-actions .btn:hover {
+    background-color: #0b4c35;
+}
+
+h1.product-name{
+
+  color: #28a745;
+}
+
+.price {
+  font-size: 1.5em; /* Adjust size as needed */
+}
+
+.discounted-price {
+  color: #FF0000; /* Red color for discounted price */
+}
+
+.original-price {
+  color: #999; /* Grey color for the original price */
+  margin-left: 10px; /* Spacing between prices */
+}
+
+/* 000000000000000000000000000000000000 ABOUT PAGE 0000000000000000000000000000000000000000000000000000000 */
+
+.brewtique-header {
+  background: #4b2e2e;
+  color: #fff;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.brewtique-title {
+  font-size: 2.5em;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.brewtique-nav {
+  margin-top: 10px;
+}
+
+.brewtique-nav-list {
+  list-style: none;
+  padding: 0;
+}
+
+.brewtique-nav-item {
+  display: inline;
+  margin: 0 20px;
+}
+
+.brewtique-nav-link {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.brewtique-nav-link:hover {
+  color: #f0c14b; /* Gold color for hover effect */
+}
+
+.brewtique-main {
+  padding: 40px 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.brewtique-about-title {
+  color: #4b2e2e;
+  font-size: 2em;
+  margin-bottom: 15px;
+}
+
+.brewtique-about-text,
+.brewtique-mission-text,
+.brewtique-join-text,
+.brewtique-thank-you-text {
+  margin-bottom: 20px;
+}
+
+.brewtique-mission-title,
+.brewtique-offer-title,
+.brewtique-join-title {
+  color: #4b2e2e;
+  font-size: 1.5em;
+  margin-top: 20px;
+}
+
+.brewtique-offer-list {
+  list-style: none;
+  padding: 0;
+}
+
+.brewtique-offer-item {
+  background: #f0f0f0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 10px;
+  transition: transform 0.3s;
+}
+
+.brewtique-offer-item:hover {
+  transform: scale(1.02);
+}
+
+.brewtique-footer {
+  text-align: center;
+  padding: 15px 0;
+  background: #4b2e2e;
+  color: #fff;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
+.brewtique-footer-text {
+  margin: 0;
+  font-size: 0.9em;
+}
+
+/* ********************************Contact US******************************************************** */
+
+.brewtique-title {
+  font-size: 2.5em;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.brewtique-nav {
+  margin-top: 10px;
+}
+
+.brewtique-nav-list {
+  list-style: none;
+  padding: 0;
+}
+
+.brewtique-nav-item {
+  display: inline;
+  margin: 0 20px;
+}
+
+.brewtique-nav-link {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.brewtique-nav-link:hover {
+  color: #f0c14b; /* Gold color for hover effect */
+}
+
+/* Main Content Styles */
+.brewtique-main {
+  padding: 40px; /* Adjust padding as needed */
+  margin: 40px auto; /* Adds space above and below the div */
+  max-width: 800px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.brewtique-contact-title {
+  color: #4b2e2e;
+  font-size: 2em;
+  margin-bottom: 15px;
+}
+
+.brewtique-contact-description {
+  margin-bottom: 20px;
+  font-size: 1.1em;
+}
+
+.brewtique-contact-info {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 30px;
+}
+
+.brewtique-contact-card {
+  background: #f0f0f0;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  flex: 1;
+  margin: 0 10px;
+  transition: box-shadow 0.3s;
+}
+
+.brewtique-contact-card:hover {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.brewtique-card-title {
+  font-size: 1.5em;
+  color: #4b2e2e;
+}
+
+.brewtique-card-text {
+  font-size: 1em;
+}
+
+/* Form Styles */
+.brewtique-contact-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.brewtique-form-title {
+  font-size: 1.5em;
+  color: #4b2e2e;
+  margin-bottom: 15px;
+}
+
+.brewtique-input,
+.brewtique-textarea {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1em;
+  transition: border-color 0.3s;
+}
+
+.brewtique-input:focus,
+.brewtique-textarea:focus {
+  border-color: #4b2e2e;
+  outline: none;
+}
+
+.brewtique-textarea {
+  height: 100px;
+}
+
+.brewtique-submit-button {
+  padding: 10px;
+  background-color: #4b2e2e;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s;
+}
+
+.brewtique-submit-button:hover {
+  background-color: #f0c14b;
+}
+
+/* ))))))))))))))))))))))))))))))))))))cartpage(((((((((((((((((((((((((((((((((((((((((((((((((((( */

@@ -1,0 +1,52 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block title %}About{% endblock title %}
+
+{% block banner-slider %}
+<div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="{% static 'app/img/banner/1.png' %}" class="d-block w-100" alt="Banner 1">
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'app/img/banner/2.png' %}" class="d-block w-100" alt="Banner 2">
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'app/img/banner/5.png' %}" class="d-block w-100" alt="Banner 3">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+{% endblock banner-slider %}
+
+{% block main-content %}
+<main class="brewtique-main">
+  <section class="brewtique-about">
+      <h2 class="brewtique-about-title">About Brewtique</h2>
+      <p class="brewtique-about-text">Welcome to Brewtique, your go-to destination for all things coffee and craft brewing! Founded with a passion for high-quality beverages and a love for community, Brewtique is more than just a store; it's a celebration of the art and culture of brewing.</p>
+
+      <h3 class="brewtique-mission-title">Our Mission</h3>
+      <p class="brewtique-mission-text">Our mission is simple: to inspire and connect with fellow beverage lovers by providing exceptional products and outstanding customer service. We carefully curate our selection, featuring sustainably sourced coffees, handcrafted teas, and an array of brewing equipment and accessories that cater to both beginners and seasoned brewers alike.</p>
+
+      <h3 class="brewtique-offer-title">What We Offer</h3>
+      <ul class="brewtique-offer-list">
+          <li class="brewtique-offer-item"><strong>Quality Products:</strong> We prioritize quality and sustainability, sourcing our coffees and teas from trusted farms and suppliers. Our inventory includes single-origin coffees, organic teas, and local craft beers that you won't find anywhere else.</li>
+          <li class="brewtique-offer-item"><strong>Expert Guidance:</strong> Our knowledgeable staff is always on hand to share their expertise, offering personalized recommendations and brewing tips to help you elevate your beverage game.</li>
+          <li class="brewtique-offer-item"><strong>Community Events:</strong> Brewtique hosts regular workshops, tastings, and events designed to bring people together, foster creativity, and share our love for brewing. Join us to learn more about the art of coffee roasting, tea blending, or home brewing.</li>
+      </ul>
+
+      <h3 class="brewtique-join-title">Join Us!</h3>
+      <p class="brewtique-join-text">Whether you’re looking to explore new flavors, master your brewing skills, or simply enjoy a great cup of coffee, Brewtique is here for you. We invite you to visit us in-store or online, and become part of our growing community of beverage enthusiasts.</p>
+
+      <p class="brewtique-thank-you-text">Thank you for choosing Brewtique – where every sip is an adventure!</p>
+  </section>
+</main>
+{% endblock main-content%}

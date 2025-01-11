@@ -1,0 +1,23 @@
+{% extends 'app/base.html' %}
+
+{% block title %}Order Success{% endblock title %}
+
+{% block main-content %}
+<div class="container my-5" style="max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9;">
+    <h3 class="text-center" style="font-family: 'Arial', sans-serif;  font-weight: bold; color: #4CAF50;">Order Placed Successfully!</h3>
+    <p style="font-size: 18px; color: #333;">Thank you for your order. Your order has been successfully placed and will be processed shortly.</p>
+    <p style="font-size: 18px; color: #333;">We will notify you once the order is shipped.</p>
+
+    <h4 style="font-size: 24px; font-weight: bold; color: #333; margin-top: 30px;">Order Details:</h4>
+    <ul style="list-style-type: none; padding: 0; margin: 0;">
+        <li style="font-size: 18px; color: #555;"><strong>Order ID:</strong> {{ order.id }}</li>
+        <li style="font-size: 18px; color: #555;"><strong>Order Date:</strong> {{ order.order_date }}</li>
+        <li style="font-size: 18px; color: #555;"><strong>Payment Method:</strong> {{ order.payment_method }}</li>
+        <li style="font-size: 18px; color: #555;"><strong>Status:</strong> {{ order.status }}</li>
+    </ul>
+
+    <div class="mt-4 text-center">
+        <a href="/" class="btn btn-success" style=" font-size: 16px; padding: 12px 25px; border-radius: 5px; text-decoration: none;">Go to Home</a>
+    </div>
+</div>
+{% endblock main-content %}
